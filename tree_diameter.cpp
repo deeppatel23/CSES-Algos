@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int d = 0, bestNode = 0;
+int d = 0, endNode1 = 0;
 void solve(vector<int>adj[], int node, int par, int depth) {
     for (auto neg : adj[node]) {
         if (neg != par) {
@@ -10,7 +10,7 @@ void solve(vector<int>adj[], int node, int par, int depth) {
     }
     if (d < depth) {
         d = depth;
-        bestNode = node;
+        endNode1 = node;
     }
     return;
 }
@@ -26,8 +26,8 @@ int main() {
         adj[x].push_back(y);
         adj[y].push_back(x);
     }
-    solve(adj, 1, 0, 0);
-    solve(adj, bestNode, 0, 0);
+    solve(adj, 1, 0, 0); //to get maximum distant node (endNode1) from any arbitaty node 1, so endNode1 is 1st end point of diameter
+    solve(adj, endNode1, 0, 0); //now get maximum distant node from endNode1, to get second endPoint of diameter
     cout << d << endl;
 
     return 0;
